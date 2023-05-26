@@ -21,7 +21,7 @@ const MyProfile = () => {
         };
     
         if (session?.user.id) fetchPosts();
-      }, []);
+      }, [session?.user.id]);
     
 
     //create function edit

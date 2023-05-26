@@ -25,18 +25,24 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
+  
+  const fetchPosts = async ()=>{
+    const response = await fetch("/api/prompt");
+    const data = await response.json();
 
+    setAllPosts(data);
+  }
   
   //create useeffect hook
   useEffect(()=>{
-    //create data fetch function
-    const fetchPosts = async ()=>{
-      const response = await fetch("/api/prompt");
-      const data = await response.json();
+    // create data fetch function
+    // const fetchPosts = async ()=>{
+    //   const response = await fetch("/api/prompt");
+    //   const data = await response.json();
 
-      setAllPosts(data);
-    }
-    console.log(allPosts)
+    //   setAllPosts(data);
+    // }
+    // console.log(allPosts)
 
     fetchPosts();
   })
@@ -45,7 +51,7 @@ const Feed = () => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
     return allPosts.filter(
       (item) =>
-        regex.test(item.creator.username) ||
+        regex.test(item.creator?.username) ||
         regex.test(item.tag) ||
         regex.test(item.prompt)
     );

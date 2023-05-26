@@ -1,9 +1,6 @@
 'use client';
 
-import React from 'react'
-
 import { useState, useEffect } from "react";
-
 import PromptCard from "./PromptCard";
 
 //component function
@@ -29,19 +26,7 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
-  //handlesearchchange function
-  const handleSearchChange = (e) => {
-    clearTimeout(searchTimeout);
-    setSearchText(e.target.value);
-     // debounce method
-     setSearchTimeout(
-      setTimeout(() => {
-        const searchResult = filterPrompts(e.target.value);
-        setSearchedResults(searchResult);
-      }, 500)
-    );
-  }
-
+  
   //create useeffect hook
   useEffect(()=>{
     //create data fetch function
@@ -66,6 +51,19 @@ const Feed = () => {
     );
   };
 
+  //handlesearchchange function
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+     // debounce method
+     setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterPrompts(e.target.value);
+        setSearchedResults(searchResult);
+      }, 500)
+    );
+  }
+
   const handleTagClick = (tagName) => {
     setSearchText(tagName);
 
@@ -89,7 +87,7 @@ const Feed = () => {
       {/* //All prompts */}
       {searchText ? (
           <PromptCardList
-          data={allPosts}
+          data={searchedResults}
           handleTagClick={handleTagClick}
         />
       ):(

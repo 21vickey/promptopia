@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+domain url = (https://promptopia-vd7f.vercel.app/)
+
 First, run the development server:
 
 ```bash
